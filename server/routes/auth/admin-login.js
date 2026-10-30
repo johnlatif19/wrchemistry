@@ -7,8 +7,8 @@ const { logAction } = require('../../services/audit-log');
 const loginAttempts = new Map();
 
 module.exports = async (req, res, next) => {
-    if (req.method !== 'POST') {
-        return res.status(405).json({ message: 'Method Not Allowed' });
+    if (req.method !== 'POST' || !req.path.endsWith('/admin-login')) {
+        return next();
     }
 
     try {
