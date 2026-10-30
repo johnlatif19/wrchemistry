@@ -19,8 +19,9 @@ module.exports = async (req, res, next) => {
         res.cookie('admin_access_token', newAccessToken, {
             httpOnly: true,
             secure: config.isProduction,
-            sameSite: 'strict',
-            maxAge: 15 * 60 * 1000
+            sameSite: 'lax',
+            maxAge: 15 * 60 * 1000,
+            path: '/'
         });
 
         return res.status(200).json({
