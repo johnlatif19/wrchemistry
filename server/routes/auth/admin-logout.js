@@ -1,8 +1,8 @@
 const config = require('../../config/environment');
 
 module.exports = async (req, res, next) => {
-    if (req.method !== 'POST') {
-        return res.status(405).json({ message: 'Method Not Allowed' });
+    if (req.method !== 'POST' || !req.path.endsWith('/admin-logout')) {
+        return next();
     }
 
     res.clearCookie('admin_access_token', {
