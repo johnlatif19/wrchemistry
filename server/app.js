@@ -38,10 +38,11 @@ app.use('/api/auth', require('./routes/auth/student-register'));
 app.use('/api/auth', require('./routes/auth/student-login'));
 app.use('/api/auth', require('./routes/auth/student-logout'));
 app.use('/api/auth', require('./routes/auth/forgot-password'));
-app.use('/api/auth', require('./routes/auth/admin-login'));
-app.use('/api/auth', require('./routes/auth/admin-logout'));
-app.use('/api/auth', require('./routes/auth/admin-refresh'));
-app.use('/api/auth', require('./routes/auth/verify-session'));
+
+app.use('/api/admin/auth', require('./routes/auth/admin-login'));
+app.use('/api/admin/auth', require('./routes/auth/admin-logout'));
+app.use('/api/admin/auth', require('./routes/auth/admin-refresh'));
+app.use('/api/admin/auth', require('./routes/auth/verify-session'));
 
 app.use('/api/students', require('./routes/students/me'));
 app.use('/api/students', require('./routes/students/list'));
