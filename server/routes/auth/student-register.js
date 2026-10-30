@@ -1,7 +1,7 @@
-const { auth, db } = require('/../../services/firebase');
-const { BadRequestError, ConflictError } = require('/../../utils/errors');
-const { isValidEmail, isValidPhone } = require('/../../utils/sanitize');
-const { logAction } = require('/../../services/audit-log');
+const { auth, db } = require('../../services/firebase');
+const { BadRequestError, ConflictError } = require('../../utils/errors');
+const { isValidEmail, isValidPhone } = require('../../utils/sanitize');
+const { logAction } = require('../../services/audit-log');
 
 module.exports = async (req, res, next) => {
     if (req.method !== 'POST') {
