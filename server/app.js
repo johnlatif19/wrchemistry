@@ -26,13 +26,6 @@ if (config.env === 'development') {
 app.use('/api', generalLimiter);
 app.use('/api', apiLimiter);
 
-app.use('/api', (req, res, next) => {
-    if (['POST', 'PUT', 'PATCH', 'DELETE'].includes(req.method)) {
-        return csrfProtection(req, res, next);
-    }
-    csrfProtection(req, res, next);
-});
-
 app.use('/api/auth', require('./routes/auth/student-register'));
 app.use('/api/auth', require('./routes/auth/student-login'));
 app.use('/api/auth', require('./routes/auth/student-logout'));
