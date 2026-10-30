@@ -1,6 +1,6 @@
-const { auth, db } = require('/../../services/firebase');
-const { BadRequestError, UnauthorizedError } = require('/../../utils/errors');
-const { logAction } = require('/../../services/audit-log');
+const { auth, db } = require('../../services/firebase');
+const { BadRequestError, UnauthorizedError } = require('../../utils/errors');
+const { logAction } = require('../../services/audit-log');
 
 module.exports = async (req, res, next) => {
     if (req.method !== 'POST') {
