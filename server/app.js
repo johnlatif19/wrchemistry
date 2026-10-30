@@ -76,7 +76,6 @@ app.use('/api/admin', require('./routes/admin/students'));
 app.use('/api/admin', require('./routes/admin/settings'));
 app.use('/api/admin', require('./routes/admin/audit-logs'));
 
-// تأمين المسارات في السيرفر نفسه
 app.get('/login-student', (req, res) => res.sendFile(path.join(process.cwd(), 'public', 'login-student.html')));
 app.get('/login-admin', (req, res) => res.sendFile(path.join(process.cwd(), 'public', 'login-admin.html')));
 app.get('/sign-student', (req, res) => res.sendFile(path.join(process.cwd(), 'public', 'sign-student.html')));
@@ -84,12 +83,10 @@ app.get('/dashboard-admin', (req, res) => res.sendFile(path.join(process.cwd(), 
 app.get('/exam', (req, res) => res.sendFile(path.join(process.cwd(), 'public', 'exam.html')));
 app.get('/homework', (req, res) => res.sendFile(path.join(process.cwd(), 'public', 'homework.html')));
 
-// الصفحة الرئيسية
 app.get('/', (req, res) => {
     res.sendFile(path.join(process.cwd(), 'public', 'login-student.html'));
 });
 
-// تقديم الملفات الثابتة (CSS, JS, Images)
 app.use(express.static(path.join(process.cwd(), 'public')));
 
 app.get('/api/health', (req, res) => {
