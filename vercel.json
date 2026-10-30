@@ -2,6 +2,15 @@
   "version": 2,
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/index.js" },
+    { "source": "/css/(.*)", "destination": "/public/css/$1" },
+    { "source": "/js/(.*)", "destination": "/public/js/$1" },
+    { "source": "/assets/(.*)", "destination": "/public/assets/$1" },
+    { "source": "/login-student", "destination": "/public/login-student.html" },
+    { "source": "/login-admin", "destination": "/public/login-admin.html" },
+    { "source": "/sign-student", "destination": "/public/sign-student.html" },
+    { "source": "/dashboard-admin", "destination": "/public/dashboard-admin.html" },
+    { "source": "/exam", "destination": "/public/exam.html" },
+    { "source": "/homework", "destination": "/public/homework.html" },
     { "source": "/(.*)", "destination": "/server/app.js" }
   ]
 }
