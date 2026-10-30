@@ -2,8 +2,8 @@ const { verifyToken } = require('../../services/jwt');
 const { UnauthorizedError } = require('../../utils/errors');
 
 module.exports = async (req, res, next) => {
-    if (req.method !== 'GET') {
-        return res.status(405).json({ message: 'Method Not Allowed' });
+    if (req.method !== 'GET' || !req.path.endsWith('/verify-session')) {
+        return next();
     }
 
     try {
