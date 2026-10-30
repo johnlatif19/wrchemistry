@@ -18,8 +18,8 @@ module.exports = async (req, res, next) => {
 
         res.cookie('admin_access_token', newAccessToken, {
             httpOnly: true,
-            secure: config.isProduction,
-            sameSite: 'lax',
+            secure: true,
+            sameSite: 'none',
             maxAge: 15 * 60 * 1000,
             path: '/'
         });
