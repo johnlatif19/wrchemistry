@@ -19,7 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
             await ApiClient.get('/admin/auth/verify-session');
             loadSection('dashboard');
         } catch (error) {
-            window.location.href = '/login-admin';
+            console.error('[AUTH FAILED]', error.message);
+            UI.showToast('انتهت الجلسة، يرجى تسجيل الدخول مرة أخرى', 'error');
+            setTimeout(() => window.location.href = '/login-admin', 1500);
         }
     };
 
