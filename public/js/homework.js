@@ -13,10 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const checkAuth = async () => {
         try {
             const user = await ApiClient.get('/students/me');
-            userNameDisplay.textContent = user.fullName;
+            userNameDisplay.textContent = user.data.fullName;
             loadAssignments(currentTab);
         } catch (error) {
-            window.location.href = 'login-student.html';
+            window.location.href = '/login-student';
         }
     };
 
@@ -31,13 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
             
             loadingState.classList.add('hidden');
 
-            if (!data.assignments || data.assignments.length === 0) {
+            if (!data.data || data.data.length === 0) {
                 emptyState.classList.remove('hidden');
                 return;
             }
 
             assignmentsGrid.innerHTML = '';
-            data.assignments.forEach(assignment => {
+            data.data.forEach(assignment => {
                 const card = document.createElement('div');
                 card.className = 'assignment-card';
                 card.innerHTML = `
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
                 
                 card.querySelector('.start-btn').addEventListener('click', () => {
-                    window.location.href = `exam.html?id=${assignment.id}`;
+                    window.location.href = `/exam?id=${assignment.id}`;
                 });
 
                 assignmentsGrid.appendChild(card);
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     logoutBtn.addEventListener('click', async () => {
         try {
             await ApiClient.post('/auth/student-logout');
-            window.location.href = 'login-student.html';
+            window.location.href = '/login-student';
         } catch (error) {
             UI.showToast('حدث خطأ أثناء تسجيل الخروج', 'error');
         }
