@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const assignmentId = urlParams.get('id');
 
     if (!assignmentId) {
-        window.location.href = 'homework.html';
+        window.location.href = '/homework';
         return;
     }
 
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             examTitle.textContent = 'الامتحان جاهز';
         } catch (error) {
             UI.showToast(error.message, 'error');
-            setTimeout(() => window.location.href = 'homework.html', 3000);
+            setTimeout(() => window.location.href = '/homework', 3000);
         }
     };
 
@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             
             UI.showToast('تم تسليم الامتحان بنجاح.', 'success');
-            setTimeout(() => window.location.href = 'homework.html', 2000);
+            setTimeout(() => window.location.href = '/homework', 2000);
         } catch (error) {
             UI.showToast(error.message, 'error');
             submitExamBtn.disabled = false;
