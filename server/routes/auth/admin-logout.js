@@ -7,8 +7,8 @@ module.exports = async (req, res, next) => {
 
     res.clearCookie('admin_access_token', {
         httpOnly: true,
-        secure: config.isProduction,
-        sameSite: 'lax',
+        secure: true,
+        sameSite: 'none',
         path: '/'
     });
 
