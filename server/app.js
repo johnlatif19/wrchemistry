@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const fs = require('fs');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const config = require('./config/environment');
@@ -12,13 +11,12 @@ const { AppError } = require('./utils/errors');
 
 const app = express();
 
+app.set('trust proxy', 1);
+applySecurity(app);
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cookieParser());
 app.use(requestSizeLimit);
-
-app.set('trust proxy', 1);
-applySecurity(app);
 
 if (config.env === 'development') {
     app.use(morgan('dev'));
@@ -27,15 +25,21 @@ if (config.env === 'development') {
 app.use('/api', generalLimiter);
 app.use('/api', apiLimiter);
 
+app.use('/api', (req, res, next) => {
+    if (['GET', 'HEAD', 'OPTIONS'].includes(req.method)) {
+        return next();
+    }
+    return csrfProtection(req, res, next);
+});
+
 app.use('/api/auth', require('./routes/auth/student-register'));
 app.use('/api/auth', require('./routes/auth/student-login'));
 app.use('/api/auth', require('./routes/auth/student-logout'));
 app.use('/api/auth', require('./routes/auth/forgot-password'));
-
-app.use('/api/admin/auth', require('./routes/auth/admin-login'));
-app.use('/api/admin/auth', require('./routes/auth/admin-logout'));
-app.use('/api/admin/auth', require('./routes/auth/admin-refresh'));
-app.use('/api/admin/auth', require('./routes/auth/verify-session'));
+app.use('/api/auth', require('./routes/auth/admin-login'));
+app.use('/api/auth', require('./routes/auth/admin-logout'));
+app.use('/api/auth', require('./routes/auth/admin-refresh'));
+app.use('/api/auth', require('./routes/auth/verify-session'));
 
 app.use('/api/students', require('./routes/students/me'));
 app.use('/api/students', require('./routes/students/list'));
@@ -70,6 +74,10 @@ app.use('/api/admin', require('./routes/admin/students'));
 app.use('/api/admin', require('./routes/admin/settings'));
 app.use('/api/admin', require('./routes/admin/audit-logs'));
 
+app.get('/api/health', (req, res) => {
+    res.status(200).json({ status: 'success', message: 'Server is running' });
+});
+
 app.get('/login-student', (req, res) => res.sendFile(path.join(process.cwd(), 'public', 'login-student.html')));
 app.get('/login-admin', (req, res) => res.sendFile(path.join(process.cwd(), 'public', 'login-admin.html')));
 app.get('/sign-student', (req, res) => res.sendFile(path.join(process.cwd(), 'public', 'sign-student.html')));
@@ -83,11 +91,10 @@ app.get('/', (req, res) => {
 
 app.use(express.static(path.join(process.cwd(), 'public')));
 
-app.get('/api/health', (req, res) => {
-    res.status(200).json({ status: 'success', message: 'Server is running' });
-});
-
 app.use((req, res, next) => {
+    if (req.originalUrl.startsWith('/api')) {
+        return res.status(404).json({ status: 'fail', message: 'API route not found' });
+    }
     next(new AppError('المسار المطلوب غير موجود.', 404));
 });
 
