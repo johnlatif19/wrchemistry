@@ -70,7 +70,8 @@ app.use('/api/uploads', require('./routes/uploads/attachment-[id]'));
 app.use('/api/admin', require('./routes/admin/stats'));
 app.use('/api/admin', require('./routes/admin/correct-answers'));
 app.use('/api/admin', require('./routes/admin/incorrect-answers'));
-app.use('/api/admin', require('./routes/admin/students'));
+app.use('/api/admin', require('./routes/admin/students')); // GET only
+app.use('/api/admin/students', require('./routes/admin/student-edit')); // NEW: PUT/PATCH/DELETE
 app.use('/api/admin', require('./routes/admin/settings'));
 app.use('/api/admin', require('./routes/admin/audit-logs'));
 
