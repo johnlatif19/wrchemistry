@@ -5,6 +5,7 @@ class ApiClient {
         const url = `${API_BASE_URL}${endpoint}`;
         const headers = {
             'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
             ...options.headers
         };
 
