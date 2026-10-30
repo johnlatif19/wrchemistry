@@ -8,7 +8,7 @@ const csrfProtection = (req, res, next) => {
     const origin = req.headers.origin || req.headers.referer;
     const allowedOrigin = process.env.APP_URL || 'https://wrchemistry.vercel.app';
 
-    if (origin && origin.startsWith(allowedOrigin)) {
+    if (origin && (origin.startsWith(allowedOrigin) || origin.includes('localhost'))) {
         return next();
     }
 
