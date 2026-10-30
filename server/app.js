@@ -32,7 +32,6 @@ app.use('/api', (req, res, next) => {
     csrfProtection(req, res, next);
 });
 
-// ... جميع مسارات API الخاصة بك (بدون تغيير) ...
 app.use('/api/auth', require('./routes/auth/student-register'));
 app.use('/api/auth', require('./routes/auth/student-login'));
 app.use('/api/auth', require('./routes/auth/student-logout'));
@@ -76,15 +75,17 @@ app.use('/api/admin', require('./routes/admin/students'));
 app.use('/api/admin', require('./routes/admin/settings'));
 app.use('/api/admin', require('./routes/admin/audit-logs'));
 
-// الملفات الثابتة
-app.use(express.static(path.join(process.cwd(), 'public')));
+// تقديم الملفات الثابتة من مجلد public
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
-// الصفحة الرئيسية: قراءة index.html مباشرة وإرساله، وتجنب مشكلة 500 من res.sendFile
+// الصفحة الرئيسية: توجيه المستخدم لصفحة تسجيل الدخول
 app.get('/', (req, res, next) => {
-    const filePath = path.join(process.cwd(), 'public', 'index.html');
+    // هنا بنقرأ ملف login-student.html ونبعته
+    const filePath = path.join(__dirname, '..', 'public', 'login-student.html');
+    
     fs.readFile(filePath, 'utf8', (err, html) => {
         if (err) {
-            console.error('Failed to read index.html:', err);
+            console.error('Failed to read HTML file:', err);
             return next(new AppError('الصفحة الرئيسية غير موجودة.', 500));
         }
         res.status(200).set('Content-Type', 'text/html; charset=utf-8').send(html);
