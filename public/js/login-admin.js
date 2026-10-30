@@ -24,7 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
             UI.setLoading(submitBtn, true);
 
             try {
-                await ApiClient.post('/admin/auth/admin-login', { username, password });
+                const response = await ApiClient.post('/admin/auth/admin-login', { username, password });
+                
+                if (response.data && response.data.token) {
+                    sessionStorage.setItem('admin_token', response.data.token);
+                }
 
                 UI.showToast('تم الدخول بنجاح', 'success');
                 setTimeout(() => {
