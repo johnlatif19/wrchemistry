@@ -27,7 +27,12 @@ const authenticateStudent = async (req, res, next) => {
 
 const authenticateAdmin = (req, res, next) => {
     try {
-        const token = req.cookies['admin_access_token'];
+        let token = req.cookies['admin_access_token'];
+
+        if (!token && req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {
+            token = req.headers.authorization.split(' ')[1];
+        }
+
         if (!token) {
             return next(new UnauthorizedError('يجب تسجيل الدخول كمسؤول.'));
         }
