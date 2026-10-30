@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 UI.showToast('تم الدخول بنجاح', 'success');
                 setTimeout(() => {
-                    window.location.href = 'dashboard-admin.html';
+                    window.location.href = '/dashboard-admin';
                 }, 1000);
 
             } catch (error) {
