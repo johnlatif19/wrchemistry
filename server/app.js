@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const config = require('./config/environment');
@@ -31,6 +32,7 @@ app.use('/api', (req, res, next) => {
     csrfProtection(req, res, next);
 });
 
+// ... جميع مسارات API الخاصة بك (بدون تغيير) ...
 app.use('/api/auth', require('./routes/auth/student-register'));
 app.use('/api/auth', require('./routes/auth/student-login'));
 app.use('/api/auth', require('./routes/auth/student-logout'));
@@ -74,17 +76,18 @@ app.use('/api/admin', require('./routes/admin/students'));
 app.use('/api/admin', require('./routes/admin/settings'));
 app.use('/api/admin', require('./routes/admin/audit-logs'));
 
-// التعامل مع الملفات الثابتة
-app.use(express.static(path.join(__dirname, '..', 'public')));
+// الملفات الثابتة
+app.use(express.static(path.join(process.cwd(), 'public')));
 
-app.get('/', (req, res) => {
-    const filePath = path.join(__dirname, '..', 'public', 'index.html');
-    console.log('Attempting to send:', filePath); // عرض المسار في السجلات
-    res.sendFile(filePath, (err) => {
+// الصفحة الرئيسية: قراءة index.html مباشرة وإرساله، وتجنب مشكلة 500 من res.sendFile
+app.get('/', (req, res, next) => {
+    const filePath = path.join(process.cwd(), 'public', 'index.html');
+    fs.readFile(filePath, 'utf8', (err, html) => {
         if (err) {
-            console.error('sendFile error:', err);
-            res.status(500).send('Index file not found');
+            console.error('Failed to read index.html:', err);
+            return next(new AppError('الصفحة الرئيسية غير موجودة.', 500));
         }
+        res.status(200).set('Content-Type', 'text/html; charset=utf-8').send(html);
     });
 });
 
