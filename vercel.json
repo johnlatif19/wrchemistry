@@ -7,13 +7,15 @@
     }
   ],
   "routes": [
+    { "src": "/css/(.*)", "dest": "/public/css/$1" },
+    { "src": "/js/(.*)", "dest": "/public/js/$1" },
+    { "src": "/assets/(.*)", "dest": "/public/assets/$1" },
     { "src": "/login-student", "dest": "/public/login-student.html" },
     { "src": "/login-admin", "dest": "/public/login-admin.html" },
     { "src": "/sign-student", "dest": "/public/sign-student.html" },
     { "src": "/dashboard-admin", "dest": "/public/dashboard-admin.html" },
     { "src": "/exam", "dest": "/public/exam.html" },
     { "src": "/homework", "dest": "/public/homework.html" },
-    { "src": "/(css|js|assets)/(.*)", "dest": "/public/$1/$2" },
     { "src": "/(.*)", "dest": "/server/app.js" }
   ]
 }
