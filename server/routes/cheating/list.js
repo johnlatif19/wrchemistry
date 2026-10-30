@@ -1,6 +1,6 @@
-const { authenticateAdmin } = require('/../../middleware/authentication');
-const { isAdmin } = require('/../../middleware/authorization');
-const { getIncidents } = require('/../../services/cheating');
+const { authenticateAdmin } = require('../../middleware/authentication');
+const { isAdmin } = require('../../middleware/authorization');
+const { getIncidents } = require('../../services/cheating');
 
 module.exports = async (req, res, next) => {
     if (req.method !== 'GET') {

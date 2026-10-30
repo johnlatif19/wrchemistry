@@ -1,6 +1,6 @@
-const { authenticateAdmin } = require('/../../middleware/authentication');
-const { isAdmin } = require('/../../middleware/authorization');
-const { db } = require('/../../services/firebase');
+const { authenticateAdmin } = require('../../middleware/authentication');
+const { isAdmin } = require('../../middleware/authorization');
+const { db } = require('../../services/firebase');
 
 module.exports = async (req, res, next) => {
     authenticateAdmin(req, res, (err) => {

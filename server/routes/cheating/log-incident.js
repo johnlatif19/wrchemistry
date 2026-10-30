@@ -1,7 +1,7 @@
-const { authenticateStudent } = require('/../../middleware/authentication');
-const { logIncident } = require('/../../services/cheating');
-const { BadRequestError } = require('/../../utils/errors');
-const { db } = require('/../../services/firebase');
+const { authenticateStudent } = require('../../middleware/authentication');
+const { logIncident } = require('../../services/cheating');
+const { BadRequestError } = require('../../utils/errors');
+const { db } = require('../../services/firebase');
 
 module.exports = async (req, res, next) => {
     if (req.method !== 'POST') {

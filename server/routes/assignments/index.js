@@ -1,9 +1,9 @@
-const { authenticateStudent } = require('/../../middleware/authentication');
-const { authenticateAdmin } = require('/../../middleware/authentication');
-const { isAdmin } = require('/../../middleware/authorization');
-const { db } = require('/../../services/firebase');
-const { BadRequestError } = require('/../../utils/errors');
-const { logAction } = require('/../../services/audit-log');
+const { authenticateStudent } = require('../../middleware/authentication');
+const { authenticateAdmin } = require('../../middleware/authentication');
+const { isAdmin } = require('../../middleware/authorization');
+const { db } = require('../../services/firebase');
+const { BadRequestError } = require('../../utils/errors');
+const { logAction } = require('../../services/audit-log');
 
 module.exports = async (req, res, next) => {
     if (req.method === 'GET') {

@@ -1,9 +1,9 @@
-const { authenticateAdmin } = require('/../../middleware/authentication');
-const { isAdmin } = require('/../../middleware/authorization');
-const { resolveIncident } = require('/../../services/cheating');
-const { db } = require('/../../services/firebase');
-const { BadRequestError, NotFoundError } = require('/../../utils/errors');
-const { logAction } = require('/../../services/audit-log');
+const { authenticateAdmin } = require('../../middleware/authentication');
+const { isAdmin } = require('../../middleware/authorization');
+const { resolveIncident } = require('../../services/cheating');
+const { db } = require('../../services/firebase');
+const { BadRequestError, NotFoundError } = require('../../utils/errors');
+const { logAction } = require('../../services/audit-log');
 
 module.exports = async (req, res, next) => {
     authenticateAdmin(req, res, (err) => {

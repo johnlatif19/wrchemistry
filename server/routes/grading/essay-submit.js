@@ -1,8 +1,8 @@
-const { authenticateAdmin } = require('/../../middleware/authentication');
-const { isAdmin } = require('/../../middleware/authorization');
-const { gradeEssay } = require('/../../services/grading');
-const { BadRequestError } = require('/../../utils/errors');
-const { logAction } = require('/../../services/audit-log');
+const { authenticateAdmin } = require('../../middleware/authentication');
+const { isAdmin } = require('../../middleware/authorization');
+const { gradeEssay } = require('../../services/grading');
+const { BadRequestError } = require('../../utils/errors');
+const { logAction } = require('../../services/audit-log');
 
 module.exports = async (req, res, next) => {
     if (req.method !== 'POST') {

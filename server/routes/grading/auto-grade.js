@@ -1,7 +1,7 @@
-const { authenticateAdmin } = require('/../../middleware/authentication');
-const { isAdmin } = require('/../../middleware/authorization');
-const { processAutoGrading } = require('/../../services/grading');
-const { BadRequestError } = require('/../../utils/errors');
+const { authenticateAdmin } = require('../../middleware/authentication');
+const { isAdmin } = require('../../middleware/authorization');
+const { processAutoGrading } = require('../../services/grading');
+const { BadRequestError } = require('../../utils/errors');
 
 module.exports = async (req, res, next) => {
     if (req.method !== 'POST') {

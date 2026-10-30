@@ -1,7 +1,7 @@
-const { authenticateAdmin } = require('/../../middleware/authentication');
-const { isAdmin } = require('/../../middleware/authorization');
-const { db } = require('/../../services/firebase');
-const { BadRequestError, NotFoundError } = require('/../../utils/errors');
+const { authenticateAdmin } = require('../../middleware/authentication');
+const { isAdmin } = require('../../middleware/authorization');
+const { db } = require('../../services/firebase');
+const { BadRequestError, NotFoundError } = require('../../utils/errors');
 
 module.exports = async (req, res, next) => {
     authenticateAdmin(req, res, (err) => {

@@ -1,8 +1,8 @@
-const { authenticateStudent } = require('/../../middleware/authentication');
-const { generateUploadSignature } = require('/../../services/cloudinary');
-const { BadRequestError } = require('/../../utils/errors');
-const { validateFile } = require('/../../utils/validate-file');
-const config = require('/../../config/environment');
+const { authenticateStudent } = require('../../middleware/authentication');
+const { generateUploadSignature } = require('../../services/cloudinary');
+const { BadRequestError } = require('../../utils/errors');
+const { validateFile } = require('../../utils/validate-file');
+const config = require('../../config/environment');
 
 module.exports = async (req, res, next) => {
     if (req.method !== 'POST') {

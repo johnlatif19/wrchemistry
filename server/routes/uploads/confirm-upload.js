@@ -1,6 +1,6 @@
-const { authenticateStudent } = require('/../../middleware/authentication');
-const { db } = require('/../../services/firebase');
-const { BadRequestError, ForbiddenError } = require('/../../utils/errors');
+const { authenticateStudent } = require('../../middleware/authentication');
+const { db } = require('../../services/firebase');
+const { BadRequestError, ForbiddenError } = require('../../utils/errors');
 
 module.exports = async (req, res, next) => {
     if (req.method !== 'POST') {

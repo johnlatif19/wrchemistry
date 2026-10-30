@@ -1,8 +1,8 @@
-const { authenticateStudent } = require('/../../middleware/authentication');
-const { db } = require('/../../services/firebase');
-const { processAutoGrading } = require('/../../services/grading');
-const { BadRequestError, ConflictError } = require('/../../utils/errors');
-const { logAction } = require('/../../services/audit-log');
+const { authenticateStudent } = require('../../middleware/authentication');
+const { db } = require('../../services/firebase');
+const { processAutoGrading } = require('../../services/grading');
+const { BadRequestError, ConflictError } = require('../../utils/errors');
+const { logAction } = require('../../services/audit-log');
 
 module.exports = async (req, res, next) => {
     if (req.method === 'GET') {

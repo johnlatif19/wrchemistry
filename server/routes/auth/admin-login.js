@@ -1,8 +1,8 @@
 const argon2 = require('argon2');
-const config = require('/../../config/environment');
-const { generateAdminAccessToken } = require('/../../services/jwt');
-const { UnauthorizedError, BadRequestError } = require('/../../utils/errors');
-const { logAction } = require('/../../services/audit-log');
+const config = require('../../config/environment');
+const { generateAdminAccessToken } = require('../../services/jwt');
+const { UnauthorizedError, BadRequestError } = require('../../utils/errors');
+const { logAction } = require('../../services/audit-log');
 
 const loginAttempts = new Map();
 
