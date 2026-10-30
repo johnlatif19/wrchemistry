@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 UI.showToast('تم إنشاء الحساب بنجاح، جاري تحويلك...', 'success');
                 setTimeout(() => {
-                    window.location.href = 'homework.html';
+                    window.location.href = '/homework';
                 }, 1500);
 
             } catch (error) {
