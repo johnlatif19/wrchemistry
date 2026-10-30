@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 UI.showToast('تم تسجيل الدخول بنجاح', 'success');
                 setTimeout(() => {
-                    window.location.href = 'homework.html';
+                    window.location.href = '/homework';
                 }, 1000);
 
             } catch (error) {
