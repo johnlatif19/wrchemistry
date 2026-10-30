@@ -8,7 +8,8 @@ module.exports = async (req, res, next) => {
     res.clearCookie('admin_access_token', {
         httpOnly: true,
         secure: config.isProduction,
-        sameSite: 'strict'
+        sameSite: 'lax',
+        path: '/'
     });
 
     return res.status(200).json({
