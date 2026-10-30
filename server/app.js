@@ -77,9 +77,9 @@ app.use('/api/admin', require('./routes/admin/audit-logs'));
 // التعامل مع الملفات الثابتة
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-// إجبار الصفحة الرئيسية على إرسال index.html
+// استبدل app.get('/') السابق بهذا
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+    res.sendFile('index.html', { root: path.join(__dirname, '..', 'public') });
 });
 
 app.get('/api/health', (req, res) => {
