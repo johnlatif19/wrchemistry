@@ -7,6 +7,11 @@ module.exports = async (req, res, next) => {
     }
 
     try {
+        console.log('[VERIFY-SESSION] Cookie names:', Object.keys(req.cookies || {}));
+        console.log('[VERIFY-SESSION] Has admin_access_token:', !!req.cookies['admin_access_token']);
+        console.log('[VERIFY-SESSION] Origin:', req.headers.origin);
+        console.log('[VERIFY-SESSION] Referer:', req.headers.referer);
+
         const token = req.cookies['admin_access_token'];
         if (!token) {
             throw new UnauthorizedError('لا توجد جلسة نشطة.');
@@ -23,6 +28,7 @@ module.exports = async (req, res, next) => {
         });
 
     } catch (error) {
+        console.log('[VERIFY-SESSION] Error:', error.message);
         return next(new UnauthorizedError('جلسة غير صالحة أو منتهية.'));
     }
 };
