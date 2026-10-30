@@ -74,8 +74,13 @@ app.use('/api/admin', require('./routes/admin/students'));
 app.use('/api/admin', require('./routes/admin/settings'));
 app.use('/api/admin', require('./routes/admin/audit-logs'));
 
-// تعديل مسار الملفات الثابتة ليعمل على Vercel
+// التعامل مع الملفات الثابتة
 app.use(express.static(path.join(__dirname, '..', 'public')));
+
+// إجبار الصفحة الرئيسية على إرسال index.html
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+});
 
 app.get('/api/health', (req, res) => {
     res.status(200).json({ status: 'success', message: 'Server is running' });
