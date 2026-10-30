@@ -1,6 +1,6 @@
-const { auth } = require('/../../services/firebase');
-const { BadRequestError } = require('/../../utils/errors');
-const { isValidEmail } = require('/../../utils/sanitize');
+const { auth } = require('../../services/firebase');
+const { BadRequestError } = require('../../utils/errors');
+const { isValidEmail } = require('../../utils/sanitize');
 
 module.exports = async (req, res, next) => {
     if (req.method !== 'POST') {
