@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const checkAuth = async () => {
         try {
-            await ApiClient.get('/auth/verify-session');
+            await ApiClient.get('/admin/auth/verify-session');
             loadSection('dashboard');
         } catch (error) {
             window.location.href = '/login-admin';
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (logoutBtn) {
         logoutBtn.addEventListener('click', async () => {
             try {
-                await ApiClient.post('/auth/admin-logout');
+                await ApiClient.post('/admin/auth/admin-logout');
                 window.location.href = '/login-admin';
             } catch (error) {
                 UI.showToast('حدث خطأ أثناء تسجيل الخروج', 'error');
