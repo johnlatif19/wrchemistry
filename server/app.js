@@ -75,22 +75,10 @@ app.use('/api/admin', require('./routes/admin/students'));
 app.use('/api/admin', require('./routes/admin/settings'));
 app.use('/api/admin', require('./routes/admin/audit-logs'));
 
-app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(express.static(path.join(process.cwd(), 'public')));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'login-student.html'));
-});
-
-app.get('/:page', (req, res, next) => {
-    const page = req.params.page;
-    const filePath = path.join(__dirname, '..', 'public', `${page}.html`);
-    
-    fs.access(filePath, fs.constants.F_OK, (err) => {
-        if (err) {
-            return next();
-        }
-        res.sendFile(filePath);
-    });
+    res.sendFile(path.join(process.cwd(), 'public', 'login-student.html'));
 });
 
 app.get('/api/health', (req, res) => {
