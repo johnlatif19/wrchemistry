@@ -3,8 +3,8 @@ const { verifyToken, generateAdminAccessToken } = require('../../services/jwt');
 const { UnauthorizedError } = require('../../utils/errors');
 
 module.exports = async (req, res, next) => {
-    if (req.method !== 'POST') {
-        return res.status(405).json({ message: 'Method Not Allowed' });
+    if (req.method !== 'POST' || !req.path.endsWith('/admin-refresh')) {
+        return next();
     }
 
     try {
