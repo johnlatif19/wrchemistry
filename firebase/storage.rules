@@ -1,0 +1,33 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && request.auth.token.admin == true;
+    }
+
+    function isValidImage() {
+      return request.resource.contentType.matches('image/.*')
+             && request.resource.size < 5 * 1024 * 1024;
+    }
+
+    match /assignments/{assignmentId}/{allPaths=**} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin() && isValidImage();
+    }
+
+    match /submissions/{studentId}/{allPaths=**} {
+      allow read: if isAdmin() || (isAuthenticated() && request.auth.uid == studentId);
+      allow write: if isAuthenticated() && request.auth.uid == studentId && isValidImage();
+    }
+
+    match /essay-answers/{studentId}/{allPaths=**} {
+      allow read: if isAdmin() || (isAuthenticated() && request.auth.uid == studentId);
+      allow write: if isAuthenticated() && request.auth.uid == studentId && isValidImage();
+    }
+  }
+}

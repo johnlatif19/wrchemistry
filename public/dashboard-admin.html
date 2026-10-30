@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - WR Chemistry</title>
+    <link rel="stylesheet" href="css/dashboard-admin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/assets/images/wrchemistry.webp">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <div class="sidebar-header">
+                <img src="/assets/images/wrchemistry.webp" alt="WR Chemistry" class="logo-small">
+                <span class="brand-name">WR Chemistry</span>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-section="dashboard">لوحة القيادة</button>
+                <button class="nav-item" data-section="create-assignment">إنشاء واجب</button>
+                <button class="nav-item" data-section="all-assignments">جميع الواجبات</button>
+                <button class="nav-item" data-section="students">الطلاب</button>
+                <button class="nav-item" data-section="correct-answers">الإجابات الصحيحة</button>
+                <button class="nav-item" data-section="incorrect-answers">الإجابات الخاطئة</button>
+                <button class="nav-item" data-section="essay-grading">تصحيح المقالات</button>
+                <button class="nav-item" data-section="cheating">الغش</button>
+                <button class="nav-item" data-section="statistics">الإحصائيات</button>
+                <button class="nav-item" data-section="settings">الإعدادات</button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="adminLogoutBtn" class="btn-logout">تسجيل الخروج</button>
+            </div>
+        </aside>
+
+        <main class="admin-main">
+            <header class="main-header">
+                <h1 id="sectionTitle">لوحة القيادة</h1>
+                <div class="admin-info">
+                    <span>مرحباً، أ. وليد</span>
+                </div>
+            </header>
+
+            <div id="sectionContent" class="content-area">
+                <div class="loading-state">
+                    <span class="spinner"></span>
+                    <p>جاري التحميل...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="js/api-client.js"></script>
+    <script src="js/dashboard-admin.js"></script>
+</body>
+</html>

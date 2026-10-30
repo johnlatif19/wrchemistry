@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الامتحان - WR Chemistry</title>
+    <link rel="stylesheet" href="css/exam.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/assets/images/wrchemistry.webp">
+</head>
+<body>
+    <header class="exam-header">
+        <div class="exam-info">
+            <h1 id="examTitle">جاري التحميل...</h1>
+            <span id="studentName" class="student-name"></span>
+        </div>
+        <div class="timer-container">
+            <span>الوقت المتبقي:</span>
+            <span id="timer" class="timer">00:00</span>
+        </div>
+    </header>
+
+    <main class="exam-container">
+        <div id="examInstruction" class="exam-instruction">
+            <h2>تعليمات هامة قبل البدء</h2>
+            <ul>
+                <li>هذا الامتحان مراقب. أي محاولة للخروج من الصفحة أو النسخ سيتم تسجيلها.</li>
+                <li>لا يمكنك العودة للصفحة بعد التسليم.</li>
+                <li>تأكد من الإجابة على جميع الأسئلة قبل التسليم.</li>
+            </ul>
+            <button id="startExamBtn" class="btn-primary">أوافق وأبدأ الامتحان</button>
+        </div>
+
+        <div id="examContent" class="exam-content hidden">
+            <div id="questionsContainer"></div>
+            <div class="exam-actions">
+                <button id="submitExamBtn" class="btn-primary">تسليم الامتحان</button>
+            </div>
+        </div>
+        
+        <div id="loadingState" class="loading-state hidden">
+            <span class="spinner"></span>
+            <p>جاري تحميل الأسئلة...</p>
+        </div>
+    </main>
+
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="js/api-client.js"></script>
+    <script src="js/exam.js"></script>
+</body>
+</html>

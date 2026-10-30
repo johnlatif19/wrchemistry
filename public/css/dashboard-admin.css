@@ -1,0 +1,316 @@
+:root {
+    --bg-color: #f1f5f9;
+    --card-bg: #ffffff;
+    --sidebar-bg: #101C32;
+    --sidebar-text: #cbd5e1;
+    --sidebar-hover: #1e293b;
+    --text-main: #101C32;
+    --text-muted: #64748b;
+    --primary: #2563EB;
+    --primary-hover: #1d4ed8;
+    --cyan: #45D5E8;
+    --border: #e2e8f0;
+    --error: #ef4444;
+    --success: #10b981;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] {
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --sidebar-bg: #020617;
+    --sidebar-text: #94a3b8;
+    --sidebar-hover: #1e293b;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: #334155;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    min-height: 100vh;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.admin-sidebar {
+    width: 260px;
+    background: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    right: 0;
+    top: 0;
+    border-left: 1px solid var(--border);
+}
+
+.sidebar-header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.logo-small {
+    width: 35px;
+    height: auto;
+}
+
+.brand-name {
+    font-weight: 700;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+.sidebar-nav {
+    flex: 1;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    overflow-y: auto;
+}
+
+.sidebar-nav::-webkit-scrollbar {
+    width: 5px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.2);
+    border-radius: 5px;
+}
+
+.nav-item {
+    background: transparent;
+    border: none;
+    color: var(--sidebar-text);
+    padding: 12px 15px;
+    border-radius: 8px;
+    text-align: right;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.nav-item:hover {
+    background: var(--sidebar-hover);
+    color: #ffffff;
+}
+
+.nav-item.active {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+.sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.btn-logout {
+    width: 100%;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn-logout:hover {
+    background: var(--error);
+    border-color: var(--error);
+}
+
+.admin-main {
+    flex: 1;
+    margin-right: 260px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--card-bg);
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+}
+
+.main-header h1 {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.admin-info span {
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.content-area {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    padding: 25px;
+    min-height: 400px;
+}
+
+.loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+}
+
+.loading-state p {
+    margin-top: 15px;
+    color: var(--text-muted);
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--border);
+    border-radius: 50%;
+    border-top-color: var(--primary);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    background: var(--card-bg);
+    color: var(--text-main);
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-right: 4px solid var(--primary);
+    animation: slideIn 0.3s ease-out;
+}
+
+.toast.error {
+    border-right-color: var(--error);
+}
+
+.toast.success {
+    border-right-color: var(--success);
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@media (max-width: 992px) {
+    .admin-sidebar {
+        width: 80px;
+    }
+    .sidebar-header .brand-name,
+    .nav-item,
+    .sidebar-footer .btn-logout {
+        display: none;
+    }
+    .sidebar-header {
+        justify-content: center;
+    }
+    .sidebar-nav {
+        align-items: center;
+        padding: 20px 5px;
+    }
+    .nav-item {
+        display: block;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        font-size: 0;
+        position: relative;
+    }
+    .nav-item::after {
+        content: '•';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 20px;
+    }
+    .admin-main {
+        margin-right: 80px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-layout {
+        flex-direction: column;
+    }
+    .admin-sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 10px;
+    }
+    .sidebar-header {
+        display: none;
+    }
+    .sidebar-nav {
+        flex-direction: row;
+        padding: 0;
+        gap: 10px;
+    }
+    .nav-item {
+        width: auto;
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+    .nav-item::after {
+        display: none;
+    }
+    .sidebar-footer {
+        display: none;
+    }
+    .admin-main {
+        margin-right: 0;
+    }
+}
