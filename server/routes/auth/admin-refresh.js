@@ -1,6 +1,6 @@
-const config = require('/../../config/environment');
-const { verifyToken, generateAdminAccessToken } = require('/../../services/jwt');
-const { UnauthorizedError } = require('/../../utils/errors');
+const config = require('../../config/environment');
+const { verifyToken, generateAdminAccessToken } = require('../../services/jwt');
+const { UnauthorizedError } = require('../../utils/errors');
 
 module.exports = async (req, res, next) => {
     if (req.method !== 'POST') {
