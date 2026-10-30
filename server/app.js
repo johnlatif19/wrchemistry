@@ -75,20 +75,26 @@ app.use('/api/admin', require('./routes/admin/students'));
 app.use('/api/admin', require('./routes/admin/settings'));
 app.use('/api/admin', require('./routes/admin/audit-logs'));
 
-// تقديم الملفات الثابتة من مجلد public
+// تقديم الملفات الثابتة (CSS, JS, Images)
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-// الصفحة الرئيسية: توجيه المستخدم لصفحة تسجيل الدخول
-app.get('/', (req, res, next) => {
-    // هنا بنقرأ ملف login-student.html ونبعته
-    const filePath = path.join(__dirname, '..', 'public', 'login-student.html');
+// الصفحة الرئيسية: تفتح صفحة تسجيل الدخول
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'public', 'login-student.html'));
+});
+
+// معالجة الروابط من غير .html (مثلاً /login-student تفتح login-student.html)
+app.get('/:page', (req, res, next) => {
+    const page = req.params.page;
+    const filePath = path.join(__dirname, '..', 'public', `${page}.html`);
     
-    fs.readFile(filePath, 'utf8', (err, html) => {
+    // التأكد إن الملف موجود قبل ما نبعته
+    fs.access(filePath, fs.constants.F_OK, (err) => {
         if (err) {
-            console.error('Failed to read HTML file:', err);
-            return next(new AppError('الصفحة الرئيسية غير موجودة.', 500));
+            // لو الملف مش موجود، نكمل للمسار اللي بعده
+            return next();
         }
-        res.status(200).set('Content-Type', 'text/html; charset=utf-8').send(html);
+        res.sendFile(filePath);
     });
 });
 
