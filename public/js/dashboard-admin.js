@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
             await ApiClient.get('/auth/verify-session');
             loadSection('dashboard');
         } catch (error) {
-            window.location.href = 'login-admin.html';
+            window.location.href = '/login-admin';
         }
     };
 
@@ -41,19 +41,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
                         <div style="background: var(--bg-color); padding: 20px; border-radius: 8px; border: 1px solid var(--border);">
                             <h3 style="color: var(--text-muted); margin-bottom: 10px;">إجمالي الطلاب</h3>
-                            <p style="font-size: 24px; font-weight: bold; color: var(--primary);">${data.totalStudents || 0}</p>
+                            <p style="font-size: 24px; font-weight: bold; color: var(--primary);">${data.data.totalStudents || 0}</p>
                         </div>
                         <div style="background: var(--bg-color); padding: 20px; border-radius: 8px; border: 1px solid var(--border);">
                             <h3 style="color: var(--text-muted); margin-bottom: 10px;">إجمالي الواجبات</h3>
-                            <p style="font-size: 24px; font-weight: bold; color: var(--primary);">${data.totalAssignments || 0}</p>
+                            <p style="font-size: 24px; font-weight: bold; color: var(--primary);">${data.data.totalAssignments || 0}</p>
                         </div>
                         <div style="background: var(--bg-color); padding: 20px; border-radius: 8px; border: 1px solid var(--border);">
                             <h3 style="color: var(--text-muted); margin-bottom: 10px;">التسليمات</h3>
-                            <p style="font-size: 24px; font-weight: bold; color: var(--primary);">${data.totalSubmissions || 0}</p>
+                            <p style="font-size: 24px; font-weight: bold; color: var(--primary);">${data.data.totalSubmissions || 0}</p>
                         </div>
                         <div style="background: var(--bg-color); padding: 20px; border-radius: 8px; border: 1px solid var(--border);">
                             <h3 style="color: var(--text-muted); margin-bottom: 10px;">المقالات المعلقة</h3>
-                            <p style="font-size: 24px; font-weight: bold; color: var(--warning);">${data.pendingEssays || 0}</p>
+                            <p style="font-size: 24px; font-weight: bold; color: var(--warning);">${data.data.pendingEssays || 0}</p>
                         </div>
                     </div>
                 `;
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         logoutBtn.addEventListener('click', async () => {
             try {
                 await ApiClient.post('/auth/admin-logout');
-                window.location.href = 'login-admin.html';
+                window.location.href = '/login-admin';
             } catch (error) {
                 UI.showToast('حدث خطأ أثناء تسجيل الخروج', 'error');
             }
