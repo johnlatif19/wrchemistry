@@ -1,15 +1,4 @@
 {
-  "version": 2,
-  "name": "wrchemistry",
   "cleanUrls": true,
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/index.js"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/public/$1"
-    }
-  ]
+  "trailingSlash": false
 }
