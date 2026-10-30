@@ -32,11 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const me = await ApiClient.get('/students/me');
             studentName.textContent = me.data.fullName;
 
-            const startRes = await ApiClient.post(`/assignments/${assignmentId}-start`);
+            const startRes = await ApiClient.post(`/assignments/${assignmentId}-start?id=${assignmentId}`);
             attemptId = startRes.data.attemptId;
             timeLeft = startRes.data.duration * 60;
             
-            const questionsRes = await ApiClient.get(`/assignments/${assignmentId}-questions`);
+            const questionsRes = await ApiClient.get(`/assignments/${assignmentId}-questions?id=${assignmentId}`);
             questionsData = questionsRes.data;
             
             examTitle.textContent = 'الامتحان جاهز';
