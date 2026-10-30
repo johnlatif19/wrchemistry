@@ -12,20 +12,25 @@ const { AppError } = require('./utils/errors');
 
 const app = express();
 
-app.set('trust proxy', 1);
-applySecurity(app);
+// 1. إعدادات القراءة الأساسية لازم تكون في الأول خالص
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cookieParser());
 app.use(requestSizeLimit);
 
+// 2. بعدين الأمان
+app.set('trust proxy', 1);
+applySecurity(app);
+
 if (config.env === 'development') {
     app.use(morgan('dev'));
 }
 
+// 3. الـ Rate Limit
 app.use('/api', generalLimiter);
 app.use('/api', apiLimiter);
 
+// 4. الراوتس (بدون CSRF حالياً للتجربة)
 app.use('/api/auth', require('./routes/auth/student-register'));
 app.use('/api/auth', require('./routes/auth/student-login'));
 app.use('/api/auth', require('./routes/auth/student-logout'));
@@ -69,6 +74,7 @@ app.use('/api/admin', require('./routes/admin/students'));
 app.use('/api/admin', require('./routes/admin/settings'));
 app.use('/api/admin', require('./routes/admin/audit-logs'));
 
+// 5. الصفحات الثابتة
 app.get('/login-student', (req, res) => res.sendFile(path.join(process.cwd(), 'public', 'login-student.html')));
 app.get('/login-admin', (req, res) => res.sendFile(path.join(process.cwd(), 'public', 'login-admin.html')));
 app.get('/sign-student', (req, res) => res.sendFile(path.join(process.cwd(), 'public', 'sign-student.html')));
