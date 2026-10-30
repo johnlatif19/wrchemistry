@@ -75,23 +75,18 @@ app.use('/api/admin', require('./routes/admin/students'));
 app.use('/api/admin', require('./routes/admin/settings'));
 app.use('/api/admin', require('./routes/admin/audit-logs'));
 
-// تقديم الملفات الثابتة (CSS, JS, Images)
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-// الصفحة الرئيسية: تفتح صفحة تسجيل الدخول
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'public', 'login-student.html'));
 });
 
-// معالجة الروابط من غير .html (مثلاً /login-student تفتح login-student.html)
 app.get('/:page', (req, res, next) => {
     const page = req.params.page;
     const filePath = path.join(__dirname, '..', 'public', `${page}.html`);
     
-    // التأكد إن الملف موجود قبل ما نبعته
     fs.access(filePath, fs.constants.F_OK, (err) => {
         if (err) {
-            // لو الملف مش موجود، نكمل للمسار اللي بعده
             return next();
         }
         res.sendFile(filePath);
