@@ -1,4 +1,4 @@
-const config = require('/../../config/environment');
+const config = require('../../config/environment');
 
 module.exports = async (req, res, next) => {
     if (req.method !== 'POST') {
