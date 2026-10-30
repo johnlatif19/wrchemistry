@@ -9,6 +9,36 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="/assets/images/wrchemistry.webp">
+    <style>
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); display: none; z-index: 2000;
+            align-items: center; justify-content: center;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-content {
+            background: var(--card-bg); padding: 30px; border-radius: 12px;
+            width: 90%; max-width: 600px; max-height: 90vh; overflow-y: auto;
+            box-shadow: var(--shadow); border: 1px solid var(--border);
+        }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .modal-header h2 { font-size: 20px; color: var(--primary); }
+        .modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-muted); }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 14px; }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 6px;
+            background: var(--bg-color); color: var(--text-main); font-family: inherit;
+        }
+        .table-container { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 12px; text-align: right; border-bottom: 1px solid var(--border); }
+        th { background: var(--bg-color); font-weight: 700; }
+        .btn-sm { padding: 6px 12px; font-size: 13px; border-radius: 4px; cursor: pointer; border: none; font-family: inherit; font-weight: 600; }
+        .btn-edit { background: var(--warning); color: white; margin-left: 5px; }
+        .btn-delete { background: var(--error); color: white; }
+        .btn-grade { background: var(--primary); color: white; }
+    </style>
 </head>
 <body>
     <div class="admin-layout">
@@ -20,15 +50,12 @@
             
             <nav class="sidebar-nav">
                 <button class="nav-item active" data-section="dashboard">لوحة القيادة</button>
-                <button class="nav-item" data-section="create-assignment">إنشاء واجب</button>
                 <button class="nav-item" data-section="all-assignments">جميع الواجبات</button>
                 <button class="nav-item" data-section="students">الطلاب</button>
                 <button class="nav-item" data-section="correct-answers">الإجابات الصحيحة</button>
                 <button class="nav-item" data-section="incorrect-answers">الإجابات الخاطئة</button>
                 <button class="nav-item" data-section="essay-grading">تصحيح المقالات</button>
                 <button class="nav-item" data-section="cheating">الغش</button>
-                <button class="nav-item" data-section="statistics">الإحصائيات</button>
-                <button class="nav-item" data-section="settings">الإعدادات</button>
             </nav>
 
             <div class="sidebar-footer">
@@ -51,6 +78,60 @@
                 </div>
             </div>
         </main>
+    </div>
+
+    <div id="editStudentModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>تعديل بيانات الطالب</h2>
+                <button class="modal-close" onclick="document.getElementById('editStudentModal').classList.remove('active')">&times;</button>
+            </div>
+            <form id="editStudentForm">
+                <input type="hidden" id="editStudentId">
+                <div class="form-group">
+                    <label>الاسم بالكامل</label>
+                    <input type="text" id="editFullName" required>
+                </div>
+                <div class="form-group">
+                    <label>كود الطالب</label>
+                    <input type="text" id="editStudentCode" required>
+                </div>
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" id="editEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>رقم الهاتف</label>
+                    <input type="tel" id="editPhone" required>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%;">حفظ التعديلات</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="gradeEssayModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>تصحيح المقال</h2>
+                <button class="modal-close" onclick="document.getElementById('gradeEssayModal').classList.remove('active')">&times;</button>
+            </div>
+            <form id="gradeEssayForm">
+                <input type="hidden" id="gradeAnswerId">
+                <div class="form-group">
+                    <label>إجابة الطالب:</label>
+                    <div id="essayTextPreview" style="background: var(--bg-color); padding: 10px; border-radius: 6px; margin-bottom: 10px; white-space: pre-wrap;"></div>
+                </div>
+                <div class="form-group">
+                    <label>الدرجة (من <span id="maxMarksDisplay"></span>)</label>
+                    <input type="number" id="essayScore" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label>ملاحظات / تعليق</label>
+                    <textarea id="essayFeedback" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%;">حفظ الدرجة</button>
+            </form>
+        </div>
     </div>
 
     <div id="toastContainer" class="toast-container"></div>
