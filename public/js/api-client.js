@@ -3,11 +3,17 @@ const API_BASE_URL = '/api';
 class ApiClient {
     static async request(endpoint, options = {}) {
         const url = `${API_BASE_URL}${endpoint}`;
+        const adminToken = sessionStorage.getItem('admin_token');
+        
         const headers = {
             'Content-Type': 'application/json',
             'X-Requested-With': 'XMLHttpRequest',
             ...options.headers
         };
+
+        if (adminToken) {
+            headers['Authorization'] = `Bearer ${adminToken}`;
+        }
 
         const config = {
             ...options,
@@ -20,6 +26,9 @@ class ApiClient {
             const data = await response.json().catch(() => ({}));
 
             if (!response.ok) {
+                if (response.status === 401) {
+                    sessionStorage.removeItem('admin_token');
+                }
                 throw new Error(data.message || 'حدث خطأ في الاتصال بالخادم');
             }
 
