@@ -77,9 +77,15 @@ app.use('/api/admin', require('./routes/admin/audit-logs'));
 // التعامل مع الملفات الثابتة
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-// استبدل app.get('/') السابق بهذا
 app.get('/', (req, res) => {
-    res.sendFile('index.html', { root: path.join(__dirname, '..', 'public') });
+    const filePath = path.join(__dirname, '..', 'public', 'index.html');
+    console.log('Attempting to send:', filePath); // عرض المسار في السجلات
+    res.sendFile(filePath, (err) => {
+        if (err) {
+            console.error('sendFile error:', err);
+            res.status(500).send('Index file not found');
+        }
+    });
 });
 
 app.get('/api/health', (req, res) => {
