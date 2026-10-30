@@ -6,17 +6,16 @@
       "use": "@vercel/node"
     }
   ],
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/server/app.js" },
-    { "src": "/css/(.*)", "dest": "/public/css/$1" },
-    { "src": "/js/(.*)", "dest": "/public/js/$1" },
-    { "src": "/assets/(.*)", "dest": "/public/assets/$1" },
-    { "src": "/login-student", "dest": "/public/login-student.html" },
-    { "src": "/login-admin", "dest": "/public/login-admin.html" },
-    { "src": "/sign-student", "dest": "/public/sign-student.html" },
-    { "src": "/dashboard-admin", "dest": "/public/dashboard-admin.html" },
-    { "src": "/exam", "dest": "/public/exam.html" },
-    { "src": "/homework", "dest": "/public/homework.html" },
-    { "src": "/(.*)", "dest": "/server/app.js" }
+  "rewrites": [
+    { "source": "/css/:path*", "destination": "/public/css/:path*" },
+    { "source": "/js/:path*", "destination": "/public/js/:path*" },
+    { "source": "/assets/:path*", "destination": "/public/assets/:path*" },
+    { "source": "/login-student", "destination": "/public/login-student.html" },
+    { "source": "/login-admin", "destination": "/public/login-admin.html" },
+    { "source": "/sign-student", "destination": "/public/sign-student.html" },
+    { "source": "/dashboard-admin", "destination": "/public/dashboard-admin.html" },
+    { "source": "/exam", "destination": "/public/exam.html" },
+    { "source": "/homework", "destination": "/public/homework.html" },
+    { "source": "/(.*)", "destination": "/server/app.js" }
   ]
 }
