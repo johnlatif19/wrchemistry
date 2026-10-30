@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const config = require('./config/environment');
@@ -73,7 +74,8 @@ app.use('/api/admin', require('./routes/admin/students'));
 app.use('/api/admin', require('./routes/admin/settings'));
 app.use('/api/admin', require('./routes/admin/audit-logs'));
 
-app.use(express.static('public'));
+// تعديل مسار الملفات الثابتة ليعمل على Vercel
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 app.get('/api/health', (req, res) => {
     res.status(200).json({ status: 'success', message: 'Server is running' });
