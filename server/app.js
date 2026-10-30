@@ -30,48 +30,48 @@ app.use('/api', (req, res, next) => {
     csrfProtection(req, res, next);
 });
 
-app.use('/api/auth', require('../api/auth/student-register'));
-app.use('/api/auth', require('../api/auth/student-login'));
-app.use('/api/auth', require('../api/auth/student-logout'));
-app.use('/api/auth', require('../api/auth/forgot-password'));
+app.use('/api/auth', require('./routes/auth/student-register'));
+app.use('/api/auth', require('./routes/auth/student-login'));
+app.use('/api/auth', require('./routes/auth/student-logout'));
+app.use('/api/auth', require('./routes/auth/forgot-password'));
 
-app.use('/api/admin/auth', require('../api/auth/admin-login'));
-app.use('/api/admin/auth', require('../api/auth/admin-logout'));
-app.use('/api/admin/auth', require('../api/auth/admin-refresh'));
-app.use('/api/admin/auth', require('../api/auth/verify-session'));
+app.use('/api/admin/auth', require('./routes/auth/admin-login'));
+app.use('/api/admin/auth', require('./routes/auth/admin-logout'));
+app.use('/api/admin/auth', require('./routes/auth/admin-refresh'));
+app.use('/api/admin/auth', require('./routes/auth/verify-session'));
 
-app.use('/api/students', require('../api/students/me'));
-app.use('/api/students', require('../api/students/list'));
-app.use('/api/students', require('../api/students/[id]'));
+app.use('/api/students', require('./routes/students/me'));
+app.use('/api/students', require('./routes/students/list'));
+app.use('/api/students', require('./routes/students/[id]'));
 
-app.use('/api/assignments', require('../api/assignments/index'));
-app.use('/api/assignments', require('../api/assignments/[id]'));
-app.use('/api/assignments', require('../api/assignments/[id]-start'));
-app.use('/api/assignments', require('../api/assignments/[id]-questions'));
+app.use('/api/assignments', require('./routes/assignments/index'));
+app.use('/api/assignments', require('./routes/assignments/[id]'));
+app.use('/api/assignments', require('./routes/assignments/[id]-start'));
+app.use('/api/assignments', require('./routes/assignments/[id]-questions'));
 
-app.use('/api/submissions', require('../api/submissions/index'));
-app.use('/api/submissions', require('../api/submissions/[id]'));
-app.use('/api/submissions', require('../api/submissions/[id]-answers'));
+app.use('/api/submissions', require('./routes/submissions/index'));
+app.use('/api/submissions', require('./routes/submissions/[id]'));
+app.use('/api/submissions', require('./routes/submissions/[id]-answers'));
 
-app.use('/api/grading', require('../api/grading/pending-essays'));
-app.use('/api/grading', require('../api/grading/essay-submit'));
-app.use('/api/grading', require('../api/grading/essay-publish'));
-app.use('/api/grading', require('../api/grading/auto-grade'));
+app.use('/api/grading', require('./routes/grading/pending-essays'));
+app.use('/api/grading', require('./routes/grading/essay-submit'));
+app.use('/api/grading', require('./routes/grading/essay-publish'));
+app.use('/api/grading', require('./routes/grading/auto-grade'));
 
-app.use('/api/cheating', require('../api/cheating/log-incident'));
-app.use('/api/cheating', require('../api/cheating/list'));
-app.use('/api/cheating', require('../api/cheating/[id]'));
+app.use('/api/cheating', require('./routes/cheating/log-incident'));
+app.use('/api/cheating', require('./routes/cheating/list'));
+app.use('/api/cheating', require('./routes/cheating/[id]'));
 
-app.use('/api/uploads', require('../api/uploads/sign-cloudinary'));
-app.use('/api/uploads', require('../api/uploads/confirm-upload'));
-app.use('/api/uploads', require('../api/uploads/attachment-[id]'));
+app.use('/api/uploads', require('./routes/uploads/sign-cloudinary'));
+app.use('/api/uploads', require('./routes/uploads/confirm-upload'));
+app.use('/api/uploads', require('./routes/uploads/attachment-[id]'));
 
-app.use('/api/admin', require('../api/admin/stats'));
-app.use('/api/admin', require('../api/admin/correct-answers'));
-app.use('/api/admin', require('../api/admin/incorrect-answers'));
-app.use('/api/admin', require('../api/admin/students'));
-app.use('/api/admin', require('../api/admin/settings'));
-app.use('/api/admin', require('../api/admin/audit-logs'));
+app.use('/api/admin', require('./routes/admin/stats'));
+app.use('/api/admin', require('./routes/admin/correct-answers'));
+app.use('/api/admin', require('./routes/admin/incorrect-answers'));
+app.use('/api/admin', require('./routes/admin/students'));
+app.use('/api/admin', require('./routes/admin/settings'));
+app.use('/api/admin', require('./routes/admin/audit-logs'));
 
 app.use(express.static('public'));
 
