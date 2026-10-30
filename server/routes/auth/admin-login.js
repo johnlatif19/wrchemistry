@@ -61,7 +61,8 @@ module.exports = async (req, res, next) => {
 
         return res.status(200).json({
             status: 'success',
-            message: 'تم تسجيل الدخول بنجاح.'
+            message: 'تم تسجيل الدخول بنجاح.',
+            data: { token: accessToken }
         });
 
     } catch (error) {
