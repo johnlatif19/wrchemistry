@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
             UI.setLoading(submitBtn, true);
 
             try {
-                await ApiClient.post('/auth/admin-login', { username, password });
-                
+                await ApiClient.post('/admin/auth/admin-login', { username, password });
+
                 UI.showToast('تم الدخول بنجاح', 'success');
                 setTimeout(() => {
                     window.location.href = '/dashboard-admin';
